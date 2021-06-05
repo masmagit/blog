@@ -1,0 +1,30 @@
+{% extends "blogapp/layout.html" %}
+{% load static %}
+
+{% block main %}
+<main class="container">
+<div class="row">
+    <div class="col-md-8">
+      <article class="blog-post">
+        <div class="row">
+          <div class="col d-flex flex-column position-static">
+            <h2 class="blog-post-title">Another blog post</h2>
+            <p class="blog-post-meta">December 23, 2013 by <a href="#">Jacob</a></p>
+          </div> 
+
+          <div class="col-auto d-none d-lg-block">
+            <img src="{% static 'blogapp/blogpic.jpg' %}" class="img-thumbnail" width="200" height="150">
+          </div>
+        </div>  
+        <br>
+        <p>I am ready for the road less traveled. Already <a href="#">brushing off the dust</a>. Yeah, you're lucky if you're on her plane. I used to bite my tongue and hold my breath. Uh, She’s a beast. I call her Karma (come back). </p>
+      </article>    
+    </div>
+
+    <div class="col-md-4 bg-light">
+        <div class="p-4 mb-3 bg-light rounded">          
+        </div>
+    </div>
+</div><!-- /.row -->
+</main>
+{% endblock %}
