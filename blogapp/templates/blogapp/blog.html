@@ -3,27 +3,19 @@
 
 {% block main %}
 <main class="container">
-<div class="row">
+<div class="row blog-font mt-3">
     <div class="col-md-8">
       {% for obj in object_list %}
       <article class="blog-post">
         <div class="row">
+          <a href="{{ obj.get_absolute_url }}">
           <div class="col d-flex flex-column position-static">
-            <h4>{{ obj.title }}</h4>
-            <p class="blog-post-meta">{{ obj.created }} by 
-              {% for author in obj.authors.all %}<a href="">{{ author.user }}</a>&nbsp;{% endfor %}
-              <br>
-              <span class="category">
-                {% for tag in obj.tags.all %} 
-                <a href="#">{{ tag }}</a>
-                {% endfor %}
-              </span>   
-            </p>
+            <a class="plain-a" href="{{ obj.get_absolute_url }}"><h4>{{ obj.title }}</h4></a>
+            {% include "blogapp/blogpost_header.html" with blogpost=obj %}
             <p>{{ obj.overview }}</p>
           </div> 
-
           <div class="col-auto d-none d-lg-block">
-            <img src="{{ obj.image.url }}" class="img-thumbnail" width="200" height="200">
+            <a class="plain-a" href="{{ obj.get_absolute_url }}"><img src="{{ obj.image.url }}" class="img-thumbnail" width="200" height="200"></a>
           </div>
         </div>  
       </article>    
@@ -41,18 +33,20 @@
           <li class="page-item"><a href="?page={{ page_obj.next_page_number }}" class="page-link">{{ page_obj.next_page_number }}</a></li>
           {% endif %}
         </ul>
-        <a class="btn btn-outline-primary" href="#">Older</a>
-        <a class="btn btn-outline-secondary disabled" href="#" tabindex="-1" aria-disabled="true">Newer</a>
-      </nav>
+      </nav>     
       {% endif %}
       {% endblock %}
-
     </div>
 
-    <div class="col-md-4 bg-light">
-        <div class="p-4 mb-3 bg-light rounded">
-          <h4>Tags</h4>
+    <div class="col-md-4 bg-light rounded">      
+      <div class="p-4 mb-3">
+        <h4>Tags</h4>
+        {% for tag in tags_count %}
+        <div class="item d-flex justify-content-between">
+          <a href="">{{ tag.tags__code }}</a><span>{{ tag.tags__code__count }}</span>
         </div>
+        {% endfor %}
+      </div>
     </div>
 </div><!-- /.row -->
 </main>

@@ -1,0 +1,9 @@
+<p class="blog-post-meta">{{ blogpost.created }} by 
+    {% for author in blogpost.authors.all %}<a href="">{{ author.user }}</a>&nbsp;{% endfor %}
+    <br>
+    <span class="category">
+    {% for tag in blogpost.tags.all %} 
+    <a href="">{{ tag }}</a>
+    {% endfor %}
+    </span>   
+</p>
