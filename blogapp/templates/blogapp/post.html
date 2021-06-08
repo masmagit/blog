@@ -3,7 +3,7 @@
 
 {% block main %}
 <main class="container">
-<div class="row blog-font mt-3">
+<div class="row mt-3">
     <div class="col-md-8">
       <article class="blog-post">
         <div class="row">
@@ -16,10 +16,42 @@
           </div>
         </div>  
         <p class="mt-2">{{ blogpost.content }}</p>
+        
+        <div class="mt-4 comment-font">
+          <div class="p-3">
+            <h6>Comments ({{ blogpost.get_comments.count }})</h6>
+          </div>
+          {% for comment in blogpost.get_comments %} 
+          <div class="d-flex flex-row p-3"> 
+            <img src="{% static 'blogapp/src/awesome192.png' %}" width="50" height="50" class="rounded-circle">
+            <div class="w-100 ms-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex flex-row align-items-center">
+                      <span class="fw-bolder">{{ comment.author }}</span> 
+                    </div> 
+                    <small>{{ comment.created }}</small>
+                </div>
+                <p class="text-justify comment-text mb-0">{{ comment.content }}</p>
+                <div class="d-flex flex-row user-feed"> 
+                  <span class="ml-3 fw-lighter"><i class="fa fa-comments-o mr-2"></i>Reply</span> 
+                </div>
+            </div>
+          </div>
+          {% endfor %}
+
+          <div class="p-3">
+            <form method="post">
+              {% csrf_token %}
+              {{comment_form }}
+              <input class="btn greenbg comment-font" name="comment_form" type="submit" value="Comment">
+            </form>
+          </div>
+        </div>
       </article>    
     </div>
     <div class="col-md-4 bg-light">
-      <div class="p-4 mb-3 bg-light rounded">          
+      <div class="p-4 mb-3 rounded">          
+        <h5><a class="plain-a" href="{% url 'blogapp:blog' %}">Back to posts</a></h5>
       </div>
     </div>
 </div><!-- /.row -->
