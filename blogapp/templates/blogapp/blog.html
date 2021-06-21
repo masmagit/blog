@@ -4,6 +4,9 @@
 {% block main %}
 <main class="container">
 <div class="row blog-font mt-3">
+    {%if not object_list %}
+    <div class="col-md-8"><h4>No posts yet.</h4></div>
+    {% endif %}
     <div class="col-md-8">
       {% for obj in object_list %}
       <article class="blog-post">
@@ -13,7 +16,7 @@
             <a class="plain-a" href="{{ obj.get_absolute_url }}"><h4>{{ obj.title }}</h4></a>
             {% include "blogapp/blogpost_header.html" with blogpost=obj %}
             <p>{{ obj.overview }}</p>
-          </div> 
+          </div>
           <div class="col-auto d-none d-lg-block">
             <a class="plain-a" href="{{ obj.get_absolute_url }}"><img src="{{ obj.image.url }}" class="img-thumbnail" width="200" height="200"></a>
           </div>

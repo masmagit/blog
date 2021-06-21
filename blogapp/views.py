@@ -29,8 +29,10 @@ class BlogPostView(generic.DetailView):
         return context
     
     def post(self, request, *args, **kwargs):
+        # Process added comments
         self.object = self.get_object()
         if (request.method == "POST") and ('comment_form' in request.POST):
+            # Saving added comment
             cform = CommentForm(request.POST)
             if cform.is_valid():
                 comment = Comment(
