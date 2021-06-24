@@ -4,9 +4,6 @@
 {% block main %}
 <main class="container">
 <div class="row blog-font mt-3">
-    {%if not object_list %}
-    <div class="col-md-8"><h4>No posts yet.</h4></div>
-    {% endif %}
     <div class="col-md-8">
       {% for obj in object_list %}
       <article class="blog-post">
@@ -22,6 +19,8 @@
           </div>
         </div>  
       </article>    
+      {% empty %}
+        <div><h4>There are no posts yet.</h4></div>
       {% endfor %}
 
       {% block pagination %}
@@ -43,10 +42,14 @@
 
     <div class="col-md-4 bg-light rounded">      
       <div class="p-4 mb-3">
-        <h5>Tags</h5>
+        {% if tag %}
+        <div>Showing posts with tag: <b>{{ tag }}</b></div>
+        {% endif %}
+        <div><h5><a class="plain-a" href="{% url 'blogapp:blog' %}">Show all posts</a></h5></div>
+        <h5 class="mt-4">Tags</h5>
         {% for tag in tags_count %}
         <div class="item d-flex justify-content-between">
-          <a href="">{{ tag.tags__code }}</a><span>{{ tag.tags__code__count }}</span>
+          <a href="{% url 'blogapp:blog_tag' tag.code %}">{{ tag.code }}</a><span>{{ tag.posts_count }}</span>
         </div>
         {% endfor %}
       </div>

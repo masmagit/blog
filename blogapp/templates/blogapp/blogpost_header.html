@@ -3,7 +3,7 @@
     <br>
     <span class="category">
     {% for tag in blogpost.tags.all %} 
-    <a href="">{{ tag }}</a>
+    <a href="{% url 'blogapp:blog_tag' tag %}">{{ tag }}</a>
     {% endfor %}
     </span>   
 </p>

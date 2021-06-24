@@ -6,7 +6,7 @@ from .models import Comment
 class CommentForm(ModelForm):
     class Meta:
         model = Comment
-        fields = ['author', 'content']
+        fields = ['author', 'email', 'content']
         
         comment_field = {'class': 'form-control my-2 comment-field'}
         widgets = {

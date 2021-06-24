@@ -60,5 +60,8 @@ class Comment(models.Model):
     class Meta:
         ordering = ('created',)
 
+    def __str__(self) -> str:
+        return f'Comment by {self.author}, created on {self.created}'    
+
     def get_comments(self):
-        return Comment.objects.filter(parent=self).filter(active=True)
+        return Comment.objects.filter(parent=self)
