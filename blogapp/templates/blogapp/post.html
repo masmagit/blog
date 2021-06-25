@@ -52,7 +52,12 @@
     <div class="col-md-4 bg-light">
       <div class="p-4 mb-3 rounded">          
         <div class="mb-3"><h5><a class="plain-a" href="{% url 'blogapp:blog' %}">Back to posts</a></h5></div>
-        <div>Similar posts</div>
+        {% if similar_posts %}
+          <div>Similar posts:</div>
+          {% for post in similar_posts %}
+          <div><a href="{{ post.get_absolute_url }}">{{ post }}</a></div>
+          {% endfor %}
+        {% endif %} 
       </div>
     </div>
 </div><!-- /.row -->

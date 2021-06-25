@@ -5,7 +5,7 @@ from django.views import generic
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .forms import CommentForm
 from .models import Comment
-from .utils import tags_count
+from .utils import tags_count, similar_posts
 
 class BlogListView(generic.ListView):
     model = BlogPost
@@ -15,7 +15,7 @@ class BlogListView(generic.ListView):
 
     def get_context_data(self, **kwargs):
         context = super(BlogListView, self).get_context_data(**kwargs)
-        context['tags_count'] = tags_count()
+        context['tags_count'] = tags_count()      
         if self.tag != None:
             context['tag'] = self.tag
         return context
@@ -34,6 +34,7 @@ class BlogPostView(generic.DetailView):
         self.object = self.get_object()
         context = super(BlogPostView, self).get_context_data(**kwargs)
         context['comment_form'] = CommentForm()
+        context['similar_posts'] = similar_posts(self.object.id)
         return context
     
     def post(self, request, *args, **kwargs):
